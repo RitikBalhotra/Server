@@ -24,7 +24,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction getTransactionById(int id){
         Optional<Transaction> transactionOptional=transactionRepository.findById(id);
-        return transactionOptional.get();
+        if(transactionOptional.isPresent()) {
+            return transactionOptional.get();
+        }
+        else{
+            return null;
+        }
     }
 
     @Override
@@ -60,4 +65,6 @@ public class TransactionServiceImpl implements TransactionService {
         return list;
 
     }
+
+
 }

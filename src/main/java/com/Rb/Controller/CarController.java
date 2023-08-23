@@ -31,7 +31,9 @@ public class CarController {
 
     private final CarService carService;
     private final CarRepository carRepository;
-    private static String imageDirectory = System.getProperty("user.dir") + "/images/";
+    private String path = "images/";
+
+    private static final String imageDirectory = System.getProperty("user.dir") + "/images/";
 
     @PostMapping(
             path = "/add/car",
@@ -84,6 +86,8 @@ public class CarController {
     public InputStream getResource(String path, String fileName) throws FileNotFoundException {
         String fullPath = path + File.separator + fileName;
         InputStream is = new FileInputStream(fullPath);
+        System.out.println(fullPath);
+        System.out.println(is);
         // db logic to return inpustream
         return is;
     }
@@ -120,6 +124,7 @@ public class CarController {
 
     @PutMapping("/update/car")
     public ResponseEntity<?> updateCar(@RequestBody Car car) {
+
         return new ResponseEntity<>(carService.UpdateCar(car), HttpStatus.OK);
     }
 
